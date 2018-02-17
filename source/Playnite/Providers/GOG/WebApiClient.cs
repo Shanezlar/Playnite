@@ -82,7 +82,7 @@ namespace Playnite.Providers.GOG
 
         public static ProductApiDetail GetGameDetails(string id)
         {
-            var baseUrl = @"http://api.gog.com/products/{0}?expand=description";
+            var baseUrl = @"https://api.gog.com/products/{0}?expand=description";
 
             try
             {

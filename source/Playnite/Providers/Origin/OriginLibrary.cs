@@ -316,7 +316,7 @@ namespace Playnite.Providers.Origin
             game.Links = new ObservableCollection<Link>()
             {
                 new Link("Store", @"https://www.origin.com/store" + metadata.StoreDetails.offerPath),
-                new Link("Wiki", @"http://pcgamingwiki.com/w/index.php?search=" + game.Name)
+                new Link("Wiki", @"https://pcgamingwiki.com/w/index.php?search=" + game.Name)
             };
 
             if (!string.IsNullOrEmpty(metadata.StoreDetails.i18n.gameForumURL))
