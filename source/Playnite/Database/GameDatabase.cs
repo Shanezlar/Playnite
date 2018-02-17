@@ -21,6 +21,7 @@ using Playnite.Providers.Uplay;
 using Playnite.Providers.BattleNet;
 using Playnite.Emulators;
 using System.Security.Cryptography;
+using Playnite.Providers.Humble;
 
 namespace Playnite.Database
 {
@@ -231,6 +232,7 @@ namespace Playnite.Database
         private IOriginLibrary originLibrary;
         private IUplayLibrary uplayLibrary;
         private IBattleNetLibrary battleNetLibrary;
+        private IHumbleLibrary humbleLibrary;
 
         public static readonly ushort DBVersion = 2;
 
@@ -250,8 +252,8 @@ namespace Playnite.Database
             Path = path;
         }
 
-        public GameDatabase(Settings settings, string path, IGogLibrary gogLibrary, ISteamLibrary steamLibrary, IOriginLibrary originLibrary, IUplayLibrary uplayLibrary, IBattleNetLibrary battleNetLibrary)
-            : this(settings, gogLibrary, steamLibrary, originLibrary, uplayLibrary, battleNetLibrary)
+        public GameDatabase(Settings settings, string path, IGogLibrary gogLibrary, ISteamLibrary steamLibrary, IOriginLibrary originLibrary, IUplayLibrary uplayLibrary, IBattleNetLibrary battleNetLibrary, IHumbleLibrary humbleLibrary)
+            : this(settings, gogLibrary, steamLibrary, originLibrary, uplayLibrary, battleNetLibrary, humbleLibrary)
         {
             Path = path;
         }
@@ -264,9 +266,10 @@ namespace Playnite.Database
             originLibrary = new OriginLibrary();
             uplayLibrary = new UplayLibrary();
             battleNetLibrary = new BattleNetLibrary();
+            humbleLibrary = new HumbleLibrary();
         }
 
-        public GameDatabase(Settings settings, IGogLibrary gogLibrary, ISteamLibrary steamLibrary, IOriginLibrary originLibrary, IUplayLibrary uplayLibrary, IBattleNetLibrary battleNetLibrary)
+        public GameDatabase(Settings settings, IGogLibrary gogLibrary, ISteamLibrary steamLibrary, IOriginLibrary originLibrary, IUplayLibrary uplayLibrary, IBattleNetLibrary battleNetLibrary, IHumbleLibrary humbleLibrary)
         {
             AppSettings = settings;
             this.gogLibrary = gogLibrary;
@@ -274,6 +277,7 @@ namespace Playnite.Database
             this.originLibrary = originLibrary;
             this.uplayLibrary = uplayLibrary;
             this.battleNetLibrary = battleNetLibrary;
+            this.humbleLibrary = humbleLibrary;
         }
 
         private void CheckDbState()
@@ -1082,6 +1086,9 @@ namespace Playnite.Database
                 case Provider.BattleNet:
                     installedGames = battleNetLibrary.GetInstalledGames();
                     break;
+                case Provider.Humble:
+                    installedGames = humbleLibrary.GetInstalledGames();
+                    break;
                 default:
                     return newGames;
             }
@@ -1169,6 +1176,9 @@ namespace Playnite.Database
                     return newGames;
                 case Provider.BattleNet:
                     importedGames = battleNetLibrary.GetLibraryGames();
+                    break;
+                case Provider.Humble:
+                    importedGames = humbleLibrary.GetLibraryGames();
                     break;
                 default:
                     return newGames;

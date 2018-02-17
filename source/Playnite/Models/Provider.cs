@@ -13,6 +13,7 @@ namespace Playnite.Models
         Origin,
         Steam,
         Uplay,
-        BattleNet
+        BattleNet,
+        Humble
     }
 }
