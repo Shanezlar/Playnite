@@ -842,7 +842,7 @@ namespace PlayniteUI.ViewModels
 
                     try
                     {
-                        if (AppSettings.BattleNetSettings.IntegrationEnabled)//TODO switch messages and settings to Humble
+                        if (AppSettings.HumbleSettings.IntegrationEnabled)
                         {
                             addedGames.AddRange(Database.UpdateOwnedGames(Provider.Humble));
                             RemoveMessage(NotificationCodes.HumbleLibDownloadImportError);

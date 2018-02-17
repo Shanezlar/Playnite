@@ -65,5 +65,9 @@ namespace PlayniteUI
             //    CombSkinColorFullscreen.SelectedValue = (ComboSkinsFullscreen.SelectedItem as Skin).Profiles.First();
             //}
         }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+
     }
+    
 }
