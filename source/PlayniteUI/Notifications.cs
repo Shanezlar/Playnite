@@ -58,5 +58,6 @@ namespace PlayniteUI
         public static readonly int BattleNetInstalledImportError = 8;
         public static readonly int BattleNetLibDownloadImportError = 9;
         public static readonly int SteamCatImportError = 10;
+        public static readonly int HumbleLibDownloadImportError = 11;
     }
 }

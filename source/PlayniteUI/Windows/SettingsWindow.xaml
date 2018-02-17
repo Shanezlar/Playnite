@@ -93,11 +93,16 @@
                             <sys:Int32>6</sys:Int32>
                         </TreeViewItem.Tag>
                     </TreeViewItem>
+                    <TreeViewItem Header="Humble">
+                        <TreeViewItem.Tag>
+                            <sys:Int32>8</sys:Int32>
+                        </TreeViewItem.Tag>
+                    </TreeViewItem>
                 </TreeViewItem>
             </TreeView>
 
             <TabControl DockPanel.Dock="Bottom" TabStripPlacement="Top" OverridesDefaultStyle="True"
-                        SelectedIndex="{Binding SelectedItem.Tag, ElementName=TreeSections}">
+                        SelectedIndex="{Binding SelectedItem.Tag, ElementName=TreeSections}" SelectionChanged="TabControl_SelectionChanged">
                 <TabControl.Style>
                     <Style TargetType="TabControl">
                         <Setter Property="Template">
@@ -470,6 +475,27 @@
                         <Button Name="ButtonClearWebCace" Content="{DynamicResource SettingsClearWebCache}" HorizontalAlignment="Left"
                                 ToolTip="{DynamicResource SettingsClearWebCacheTooltip}"
                                 Command="{Binding ClearWebCacheCommand}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Visibility="Collapsed">
+                    <StackPanel Margin="20">
+                        <CheckBox IsChecked="{Binding Settings.HumbleSettings.IntegrationEnabled}"
+                                    Name="CheckHumbleEnabled" Content="{DynamicResource SettingsImportLabel}" HorizontalAlignment="Left"  VerticalAlignment="Center"
+                                    DockPanel.Dock="Top" />
+                        <DockPanel DockPanel.Dock="Top" Margin="20,5,5,5" LastChildFill="False"
+                                   IsEnabled="{Binding IsChecked, ElementName=CheckHumbleEnabled}">
+                            <Button Name="ButtonHumble" Content="{DynamicResource AuthenticateLabel}" HorizontalAlignment="Left"
+                                Command="{Binding AuthHumbleCommand}"/>
+                            <TextBlock Text="{DynamicResource SettingsLoginStatus}" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                            <TextBlock VerticalAlignment="Center">
+                                <TextBlock.Text>
+                                    <PriorityBinding>
+                                        <Binding Path="HumbleLoginStatus" IsAsync="True" Mode="OneWay" />
+                                        <Binding Source="{StaticResource LoginChecking}" />
+                                    </PriorityBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DockPanel>
                     </StackPanel>
                 </TabItem>
             </TabControl>

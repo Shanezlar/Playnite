@@ -97,6 +97,31 @@ namespace PlayniteUI.ViewModels
             }
         }
 
+        private Playnite.Providers.Humble.WebApiClient humbleApiClient = new Playnite.Providers.Humble.WebApiClient();
+
+        public string HumbleLoginStatus
+        {
+            get
+            {
+                try
+                {
+                    if (humbleApiClient.GetLoginRequired())
+                    {
+                        return resources.FindString("LoginRequired");
+                    }
+                    else
+                    {
+                        return resources.FindString("OKLabel");
+                    }
+                }
+                catch (Exception e) when (!PlayniteEnvironment.ThrowAllErrors)
+                {
+                    logger.Error(e, "Failed to test Humble login status.");
+                    return resources.FindString("LoginFailed");
+                }
+            }
+        }
+
         public List<LocalSteamUser> SteamUsers
         {
             get
@@ -201,6 +226,14 @@ namespace PlayniteUI.ViewModels
             {
                 AuthenticateBattleNet();
             }, (a) => Settings.BattleNetSettings.LibraryDownloadEnabled);
+        }
+
+        public RelayCommand<object> AuthHumbleCommand
+        {
+            get => new RelayCommand<object>((a) =>
+            {
+                AuthenticateHumble();
+            }, (a) => Settings.HumbleSettings.LibraryDownloadEnabled);
         }
 
         public RelayCommand<Uri> NavigateUrlCommand
@@ -370,6 +403,20 @@ namespace PlayniteUI.ViewModels
             catch (Exception e) when (!PlayniteEnvironment.ThrowAllErrors)
             {
                 logger.Error(e, "BattleNet auth failed.");
+                dialogs.ShowMessage(resources.FindString("LoginFailed"), "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void AuthenticateHumble()
+        {
+            try
+            {
+                humbleApiClient.Login();
+                OnPropertyChanged("HumbleLoginStatus");
+            }
+            catch (Exception e) when (!PlayniteEnvironment.ThrowAllErrors)
+            {
+                logger.Error(e, "Humble auth failed.");
                 dialogs.ShowMessage(resources.FindString("LoginFailed"), "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

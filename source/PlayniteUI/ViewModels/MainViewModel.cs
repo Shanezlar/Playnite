@@ -837,7 +837,26 @@ namespace PlayniteUI.ViewModels
                             Resources.FindString("BnetLibraryImportError") + $" {e.Message}",
                             NotificationType.Error, null));
                     }
-                                        
+
+                    ProgressStatus = Resources.FindString("ProgressHumbleLibImport");
+
+                    try
+                    {
+                        if (AppSettings.BattleNetSettings.IntegrationEnabled)//TODO switch messages and settings to Humble
+                        {
+                            addedGames.AddRange(Database.UpdateOwnedGames(Provider.Humble));
+                            RemoveMessage(NotificationCodes.HumbleLibDownloadImportError);
+                        }
+                    }
+                    catch (Exception e) when (!PlayniteEnvironment.ThrowAllErrors)
+                    {
+                        Logger.Error(e, "Failed to download Humble library updates.");
+                        AddMessage(new NotificationMessage(
+                            NotificationCodes.HumbleLibDownloadImportError,
+                            Resources.FindString("HumbleLibraryImportError") + $" {e.Message}",
+                            NotificationType.Error, null));
+                    }
+
                     ProgressStatus = Resources.FindString("ProgressLibImportFinish");
                     Thread.Sleep(1500);
 
