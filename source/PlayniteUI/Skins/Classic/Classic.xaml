@@ -2674,6 +2674,10 @@
                                         <TextBlock Text="{Binding GamesStats.BattleNet, Mode=OneWay, StringFormat=Battle.net ({0})}" />
                                     </CheckBox>
 
+                                    <CheckBox Name="CheckFilterHumble" IsChecked="{Binding AppSettings.FilterSettings.Humble}" Style="{StaticResource FilterCheck}">
+                                        <TextBlock Text="{Binding GamesStats.Humble, Mode=OneWay, StringFormat=Humble ({0})}" />
+                                    </CheckBox>
+
                                     <CheckBox Name="CheckFilterCustom" IsChecked="{Binding AppSettings.FilterSettings.Custom}" Style="{StaticResource FilterCheck}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{DynamicResource CustomLabel}" Margin="0,0,5,0" />

@@ -319,6 +319,7 @@
     <Resource Include="Images\patreon.png" />
     <Resource Include="Images\reddit.png" />
     <Resource Include="Images\twitter.png" />
+    <Resource Include="Images\humbleicon.png" />
     <Content Include="Localization\english.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

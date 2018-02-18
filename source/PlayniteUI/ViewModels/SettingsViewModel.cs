@@ -288,9 +288,11 @@ namespace PlayniteUI.ViewModels
             battleNetApiClient?.Dispose();
             originApiClient?.Dispose();
             gogApiClient?.Dispose();
+            humbleApiClient?.Dispose();
             battleNetApiClient = null;
             originApiClient = null;
             gogApiClient = null;
+            humbleApiClient = null;
         }
 
         public void ConfirmDialog()
@@ -347,6 +349,11 @@ namespace PlayniteUI.ViewModels
             }
 
             if (!origSettings.UplaySettings.IsEqualJson(Settings.UplaySettings))
+            {
+                ProviderIntegrationChanged = true;
+            }
+
+            if (!origSettings.HumbleSettings.IsEqualJson(Settings.HumbleSettings))
             {
                 ProviderIntegrationChanged = true;
             }

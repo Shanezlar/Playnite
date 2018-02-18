@@ -24,6 +24,7 @@ namespace Playnite
         public int GOG { get; private set; } = 0;
         public int Uplay { get; private set; } = 0;
         public int BattleNet { get; private set; } = 0;
+        public int Humble { get; private set; } = 0;
         public int Custom { get; private set; } = 0;
 
         public int Total
@@ -72,6 +73,7 @@ namespace Playnite
             GOG = 0;
             Uplay = 0;
             BattleNet = 0;
+            Humble = 0;
             Custom = 0;
 
             foreach (var game in database.GamesCollection.FindAll().ToList())
@@ -115,6 +117,9 @@ namespace Playnite
                     case Provider.BattleNet:
                         BattleNet++;
                         break;
+                    case Provider.Humble:
+                        Humble++;
+                        break;
                     default:
                         break;
                 }
@@ -139,6 +144,7 @@ namespace Playnite
             OnPropertyChanged("GOG");
             OnPropertyChanged("Uplay");
             OnPropertyChanged("BattleNet");
+            OnPropertyChanged("Humble");
             OnPropertyChanged("Custom");
             OnPropertyChanged("Total");
         }
@@ -230,6 +236,9 @@ namespace Playnite
                     break;
                 case Provider.BattleNet:
                     BattleNet = BattleNet + (1 * modifier);
+                    break;
+                case Provider.Humble:
+                    Humble = Humble + (1 * modifier);
                     break;
             }
         }

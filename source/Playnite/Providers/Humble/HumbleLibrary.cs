@@ -49,7 +49,7 @@ namespace Playnite.Providers.Humble
                 var page = api.GetOwnedGames();
                                 
                 List<GetOrdersResult> orders = JsonConvert.DeserializeObject<List<GetOrdersResult>>(page);
-
+                
                 foreach (var order in orders)
                 {
 
@@ -88,7 +88,7 @@ namespace Playnite.Providers.Humble
                 IsoPath = download.download_struct[0].url.web,
                 InstallDirectory = @"",
                 PlayTask = null,
-                Description = @"Install will initiate download"                
+                Description = @""                
             };
             return game;
         }

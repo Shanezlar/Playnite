@@ -44,6 +44,7 @@ namespace Playnite
                     GOG ||
                     Uplay ||
                     BattleNet ||
+                    Humble ||
                     Custom ||
                     !string.IsNullOrEmpty(Name) ||
                     !string.IsNullOrEmpty(ReleaseDate) ||

@@ -182,6 +182,7 @@ namespace PlayniteUI
                     AppSettings.OriginSettings = settings.OriginSettings;
                     AppSettings.BattleNetSettings = settings.BattleNetSettings;
                     AppSettings.UplaySettings = settings.UplaySettings;
+                    AppSettings.HumbleSettings = settings.HumbleSettings;
                     AppSettings.SaveSettings();
 
                     Database = new GameDatabase(AppSettings, AppSettings.DatabasePath);

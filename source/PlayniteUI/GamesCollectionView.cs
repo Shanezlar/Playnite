@@ -264,6 +264,8 @@ namespace PlayniteUI
                             return @"resources:/Images/uplayicon.png";
                         case Provider.BattleNet:
                             return @"resources:/Images/battleneticon.png";
+                        case Provider.Humble:
+                            return @"resources:/Images/humbleicon.png";
                         case Provider.Custom:
                         default:
                             return @"resources:/Images/icon_dark.png";

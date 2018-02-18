@@ -1676,6 +1676,8 @@ namespace PlayniteUI.ViewModels
                             break;
                         case Provider.Uplay:
                             return;
+                        case Provider.Humble:
+                            return;
                         case Provider.Custom:
                         default:
                             return;

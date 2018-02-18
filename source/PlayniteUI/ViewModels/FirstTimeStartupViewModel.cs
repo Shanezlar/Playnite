@@ -283,6 +283,7 @@ namespace PlayniteUI.ViewModels
             Settings.OriginSettings.IntegrationEnabled = true;
             Settings.UplaySettings.IntegrationEnabled = true;
             Settings.BattleNetSettings.IntegrationEnabled = true;
+            Settings.HumbleSettings.IntegrationEnabled = false; //enable in settings for now
 
             this.window = window;
             this.dialogs = dialogs;
