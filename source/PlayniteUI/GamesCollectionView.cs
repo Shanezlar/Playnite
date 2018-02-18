@@ -485,7 +485,8 @@ namespace PlayniteUI
                 Settings.FilterSettings.GOG == false &&
                 Settings.FilterSettings.Custom == false &&
                 Settings.FilterSettings.Uplay == false &&
-                Settings.FilterSettings.BattleNet == false)
+                Settings.FilterSettings.BattleNet == false &&
+                Settings.FilterSettings.Humble == false)
             {
                 providersFilter = true;
             }
@@ -525,6 +526,12 @@ namespace PlayniteUI
                         break;
                     case Provider.BattleNet:
                         if (Settings.FilterSettings.BattleNet)
+                        {
+                            providersFilter = true;
+                        }
+                        break;
+                    case Provider.Humble:
+                        if (Settings.FilterSettings.Humble)
                         {
                             providersFilter = true;
                         }

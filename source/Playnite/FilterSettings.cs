@@ -346,6 +346,23 @@ namespace Playnite
             }
         }
 
+        private bool humble;
+        public bool Humble
+        {
+            get
+            {
+                return humble;
+            }
+
+            set
+            {
+                humble = value;
+                OnPropertyChanged("Humble");
+                OnFilterChanged("Humble");
+                OnPropertyChanged("Active");
+            }
+        }
+
         private bool custom;
         public bool Custom
         {
@@ -493,6 +510,12 @@ namespace Playnite
             {
                 BattleNet = false;
                 filterChanges.Add("BattleNet");
+            }
+
+            if (Humble != false)
+            {
+                Humble = false;
+                filterChanges.Add("Humble");
             }
 
             if (Custom != false)

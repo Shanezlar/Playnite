@@ -37,13 +37,60 @@ namespace Playnite.Providers.Humble
 
         public List<IGame> GetLibraryGames()
         {
-            var games = new List<IGame>();
+            using (var api = new WebApiClient())
+            {
+                if (api.GetLoginRequired())
+                {
+                    throw new Exception("User is not logged in.");
+                }
 
+                var games = new List<IGame>();
 
+                var page = api.GetOwnedGames();
+                                
+                List<GetOrdersResult> orders = JsonConvert.DeserializeObject<List<GetOrdersResult>>(page);
 
+                foreach (var order in orders)
+                {
 
-            return games;
+                    var orderinfoResult = api.GetOrderInfo(order.gamekey);
+                    
+                    GetOrderInfoResult orderInfo = JsonConvert.DeserializeObject<GetOrderInfoResult>(orderinfoResult);
+                    if (orderInfo == null) continue;
+                    
+                    foreach (var subproduct in orderInfo.subproducts)
+                    {
+                        if (subproduct.human_name == null) continue;
+                        string human_name = subproduct.human_name;
+                        foreach (var download in subproduct.downloads)
+                        {
+                            if (download.platform == null) continue;
+                            if (download.platform == "windows")
+                            {
+                                games.Add(CreateGameForDownloadObject(download, subproduct));                        
+                            }
+                        }
+                    }                    
+                }
+
+                return games;
+            }
         }
-    }
-    
+
+        private Game CreateGameForDownloadObject(Download download, Subproduct subproduct)
+        {
+            var game = new Game()
+            {
+                Provider = Provider.Humble,
+                ProviderId = download.machine_name,
+                Name = subproduct.human_name,
+                Icon = subproduct.icon,
+                IsoPath = download.download_struct[0].url.web,
+                InstallDirectory = @"",
+                PlayTask = null,
+                Description = @"Install will initiate download"                
+            };
+            return game;
+        }
+    }    
 }

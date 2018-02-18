@@ -214,6 +214,7 @@
     <Compile Include="Providers\Humble\IHumbleLibrary.cs" />
     <Compile Include="Providers\Humble\HumbleLibrary.cs" />
     <Compile Include="Providers\Humble\WebApiClient.cs" />
+    <Compile Include="Providers\Humble\WebApiTypes.cs" />
     <Compile Include="Providers\IGameStateMonitor.cs" />
     <Compile Include="Providers\Origin\IOriginLibrary.cs" />
     <Compile Include="Providers\Origin\OriginGameStateMonitor.cs" />

@@ -476,6 +476,9 @@ namespace Playnite.Models
                     }
                     RegisterStateMonitor(new BattleNetGameStateMonitor(product, new BattleNetLibrary()), GameStateMonitorType.Install);
                     break;
+                case Provider.Humble:
+                    Process.Start(IsoPath);
+                    break;
                 case Provider.Custom:
                     break;
                 default:

@@ -87,7 +87,7 @@ namespace Playnite.Providers.Humble
             if (e.IsLoading == false)
             {
                 var b = (CefSharp.OffScreen.ChromiumWebBrowser)sender;
-                gamesList = await b.GetSourceAsync();
+                gamesList = await b.GetTextAsync();
                 gamesGotEvent.Set();                
             }
         }
@@ -116,6 +116,45 @@ namespace Playnite.Providers.Humble
         }
 
         #endregion GetOwnedGames
+
+        #region GetOrderInfo
+        private async void getOrderInfo_StateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            if (e.IsLoading == false)
+            {
+                var b = (CefSharp.OffScreen.ChromiumWebBrowser)sender;
+                orderInfo = await b.GetTextAsync();
+                orderinfoGotEvent.Set();
+            }
+        }
+
+        private string orderInfo = string.Empty;
+        private AutoResetEvent orderinfoGotEvent = new AutoResetEvent(false);
+        private string orderinfoURL = @"https://www.humblebundle.com/api/v1/order/{0}?all_tpkds=true";
+
+        public string GetOrderInfo(string orderKey)
+        {
+            if (!browser.IsBrowserInitialized)
+            {
+                browserInitializedEvent.WaitOne(5000);
+            }
+
+            try
+            {
+                orderInfo = string.Empty;
+                browser.LoadingStateChanged += getOrderInfo_StateChanged;//
+                browser.Load(string.Format(orderinfoURL, orderKey));
+                orderinfoGotEvent.WaitOne(10000);
+                return orderInfo;
+            }
+            finally
+            {
+                browser.LoadingStateChanged -= getOrderInfo_StateChanged;
+            }
+        }
+
+
+        #endregion GetOrderInfo
 
         #region Login
         private void login_StateChanged(object sender, LoadingStateChangedEventArgs e)
@@ -158,7 +197,7 @@ namespace Playnite.Providers.Humble
             loginSuccess = false;
             loginWindow = new LoginWindow()
             {
-                Height = 600,
+                Height = 650,
                 Width = 500
             };
             loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
