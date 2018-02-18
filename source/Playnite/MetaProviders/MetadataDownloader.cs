@@ -3,6 +3,7 @@ using Playnite.Database;
 using Playnite.Models;
 using Playnite.Providers.BattleNet;
 using Playnite.Providers.GOG;
+using Playnite.Providers.Humble;
 using Playnite.Providers.Origin;
 using Playnite.Providers.Steam;
 using System;
@@ -277,6 +278,7 @@ namespace Playnite.MetaProviders
         IMetadataProvider originProvider;
         IMetadataProvider gogProvider;
         IMetadataProvider battleNetProvider;
+        IMetadataProvider humbleProvider;
         IMetadataProvider igdbProvider;
 
         public MetadataDownloader()
@@ -285,6 +287,7 @@ namespace Playnite.MetaProviders
             originProvider = new OriginMetadataProvider();
             gogProvider = new GogMetadataProvider();
             battleNetProvider = new BattleNetMetadataProvider();
+            humbleProvider = new HumbleMetadataProvider();
             igdbProvider = new IGDBMetadataProvider();
         }
 
@@ -294,6 +297,7 @@ namespace Playnite.MetaProviders
             originProvider = new OriginMetadataProvider();
             gogProvider = new GogMetadataProvider();
             battleNetProvider = new BattleNetMetadataProvider();
+            humbleProvider = new HumbleMetadataProvider();
             igdbProvider = new IGDBMetadataProvider(igdbApiKey);
         }
 
@@ -302,12 +306,14 @@ namespace Playnite.MetaProviders
             IMetadataProvider originProvider,
             IMetadataProvider gogProvider,
             IMetadataProvider battleNetProvider,
+            IMetadataProvider humbleProvider,
             IMetadataProvider igdbProvider)
         {
             this.steamProvider = steamProvider;
             this.originProvider = originProvider;
             this.gogProvider = gogProvider;
             this.battleNetProvider = battleNetProvider;
+            this.humbleProvider = humbleProvider;
             this.igdbProvider = igdbProvider;
         }
 
@@ -323,6 +329,8 @@ namespace Playnite.MetaProviders
                     return steamProvider;
                 case Provider.BattleNet:
                     return battleNetProvider;
+                case Provider.Humble:
+                    return humbleProvider;
                 case Provider.Uplay:
                 case Provider.Custom:
                 default:

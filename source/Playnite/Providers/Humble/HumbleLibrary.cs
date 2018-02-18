@@ -26,8 +26,6 @@ namespace Playnite.Providers.Humble
     {
         private Logger logger = LogManager.GetCurrentClassLogger();
 
-
-
         public List<IGame> GetInstalledGames()
         {
             var games = new List<IGame>();
@@ -85,12 +83,18 @@ namespace Playnite.Providers.Humble
                 ProviderId = download.machine_name,
                 Name = subproduct.human_name,
                 Icon = subproduct.icon,
-                IsoPath = download.download_struct[0].url.web,
+                IsoPath = download.download_struct[0].url.web, //might expire; would need new order request and knowing subproduct index and download index to generate new one
                 InstallDirectory = @"",
                 PlayTask = null,
                 Description = @""                
             };
             return game;
         }
-    }    
-}
+
+        public GameMetadata UpdateGameWithMetadata(IGame game)
+        {
+            throw new NotSupportedException();
+        }
+    }
+}    
+
