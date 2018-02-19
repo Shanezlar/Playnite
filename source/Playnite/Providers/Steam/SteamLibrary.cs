@@ -290,7 +290,7 @@ namespace Playnite.Providers.Steam
 
 
             // Image
-            var imageRoot = @"https://cdn.akamai.steamstatic.com/steam/apps/{0}/header.jpg";
+            var imageRoot = @"https://steamcdn-a.akamaihd.net/steam/apps/{0}/header.jpg";
             var imageUrl = string.Format(imageRoot, id);
             byte[] imageData = null;
 
