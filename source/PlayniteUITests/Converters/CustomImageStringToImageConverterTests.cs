@@ -38,7 +38,7 @@ namespace PlayniteUITests.Converters
         {
             var converter = new CustomImageStringToImageConverter();
             FileSystem.DeleteFolder(Paths.ImagesCachePath);
-            var image = @"https://playnite.link/applogo.png";
+            var image = @"http://playnite.link/applogo.png";
             var result = converter.Convert(image, null, null, CultureInfo.CurrentCulture);
             Assert.AreEqual(typeof(BitmapImage), result.GetType());
         }
