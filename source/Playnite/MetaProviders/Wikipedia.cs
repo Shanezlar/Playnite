@@ -209,7 +209,7 @@ namespace Playnite.MetaProviders
                     image = boxartElem[0].Attributes["src"].Value;
                 }
 
-                image = "https:" + image;
+                image = "http:" + image;
             }
 
             game.Image = image;

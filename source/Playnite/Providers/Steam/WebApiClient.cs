@@ -13,7 +13,7 @@ namespace Playnite.Providers.Steam
     {
         public static StoreAppDetailsResult.AppDetails GetStoreAppDetail(int appId)
         {
-            var url = @"https://store.steampowered.com/api/appdetails?appids={0}";
+            var url = @"http://store.steampowered.com/api/appdetails?appids={0}";
             url = string.Format(url, appId);
             var data = Web.DownloadString(url);
             var parsedData = JsonConvert.DeserializeObject<Dictionary<string, StoreAppDetailsResult>>(data);

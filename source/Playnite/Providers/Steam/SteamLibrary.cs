@@ -28,7 +28,7 @@ namespace Playnite.Providers.Steam
 
         private string GetGameWorkshopUrl(int id)
         {
-            return $"https://steamcommunity.com/app/{id}/workshop/";
+            return $"http://steamcommunity.com/app/{id}/workshop/";
         }
 
         public IGame GetInstalledGameFromFile(string path)
@@ -290,7 +290,7 @@ namespace Playnite.Providers.Steam
 
 
             // Image
-            var imageRoot = @"https://cdn.akamai.steamstatic.com/steam/apps/{0}/header.jpg";
+            var imageRoot = @"http://cdn.akamai.steamstatic.com/steam/apps/{0}/header.jpg";
             var imageUrl = string.Format(imageRoot, id);
             byte[] imageData = null;
 
@@ -340,9 +340,9 @@ namespace Playnite.Providers.Steam
             game.Links = new ObservableCollection<Link>()
             {
                 new Link("Forum", @"https://steamcommunity.com/app/" + game.ProviderId),
-                new Link("News", @"https://store.steampowered.com/news/?appids=" + game.ProviderId),
-                new Link("Store", @"https://store.steampowered.com/app/" + game.ProviderId),
-                new Link("Wiki", @"https://pcgamingwiki.com/api/appid.php?appid=" + game.ProviderId)
+                new Link("News", @"http://store.steampowered.com/news/?appids=" + game.ProviderId),
+                new Link("Store", @"http://store.steampowered.com/app/" + game.ProviderId),
+                new Link("Wiki", @"http://pcgamingwiki.com/api/appid.php?appid=" + game.ProviderId)
             };
 
             if (metadata.StoreDetails?.categories?.FirstOrDefault(a => a.id == 30) != null)

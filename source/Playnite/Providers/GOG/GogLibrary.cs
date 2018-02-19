@@ -241,9 +241,9 @@ namespace Playnite.Providers.GOG
                     metadata.StoreDetails = WebApiClient.GetGameStoreData(storeUrl);
                 }
 
-                var icon = Web.DownloadData("https:" + gameDetail.images.icon);
+                var icon = Web.DownloadData("http:" + gameDetail.images.icon);
                 var iconName = Path.GetFileName(new Uri(gameDetail.images.icon).AbsolutePath);
-                var image = Web.DownloadData("https:" + gameDetail.images.logo2x);
+                var image = Web.DownloadData("http:" + gameDetail.images.logo2x);
                 var imageName = Path.GetFileName(new Uri(gameDetail.images.logo2x).AbsolutePath);
 
                 metadata.Icon = new FileDefinition(
@@ -258,7 +258,7 @@ namespace Playnite.Providers.GOG
                     image
                 );
 
-                metadata.BackgroundImage = "https:" + gameDetail.images.background;
+                metadata.BackgroundImage = "http:" + gameDetail.images.background;
             }
 
             return metadata;
@@ -278,7 +278,7 @@ namespace Playnite.Providers.GOG
             game.Description = metadata.GameDetails.description.full;
             game.Links = new ObservableCollection<Link>()
             {
-                new Link("Wiki", @"https://pcgamingwiki.com/w/index.php?search=" + metadata.GameDetails.title)
+                new Link("Wiki", @"http://pcgamingwiki.com/w/index.php?search=" + metadata.GameDetails.title)
             };
             
             if (!string.IsNullOrEmpty(metadata.GameDetails.links.forum))
