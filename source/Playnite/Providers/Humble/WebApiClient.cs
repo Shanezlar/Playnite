@@ -169,6 +169,7 @@ namespace Playnite.Providers.Humble
                     //this browser does not automatically go to login form (contrary to full browser - tested with Chrome and Firefox)
                     //therefore execute JavaScript in the browser window to click the login button ONCE as soon as it is available
                     b.GetMainFrame().ExecuteJavaScriptAsync("var loginButtonClicked;if (!loginButtonClicked){var loginButton = document.getElementsByClassName('js-account-login')[0]; if(loginButton){loginButton.click(); loginButtonClicked=true}}");
+                    b.Focus();
 
                     if (b.Address.EndsWith(loginSuccessUrl))
                     {
