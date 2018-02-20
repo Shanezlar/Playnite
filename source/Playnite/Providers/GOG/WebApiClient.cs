@@ -250,6 +250,8 @@ namespace Playnite.Providers.GOG
 
                 b.Dispatcher.Invoke(() =>
                 {
+                    b.Focus();
+
                     if (b.Address.Contains("/on_login_success"))
                     {
                         loginWindow.Dispatcher.Invoke(() =>
