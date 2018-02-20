@@ -477,7 +477,13 @@ namespace Playnite.Models
                     RegisterStateMonitor(new BattleNetGameStateMonitor(product, new BattleNetLibrary()), GameStateMonitorType.Install);
                     break;
                 case Provider.Humble:
-                    Process.Start(IsoPath);
+                    //check if IsoPath is a valid HTTPS uri, then launch it 
+                    Uri uriResult;
+                    bool isHttps = Uri.TryCreate(IsoPath, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttps;
+                    if (isHttps)
+                    {
+                        Process.Start(uriResult.ToString());
+                    }
                     break;
                 case Provider.Custom:
                     break;
